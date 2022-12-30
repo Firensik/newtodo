@@ -84,10 +84,17 @@ const createTodoElement = (todo) => {
 
 
 }
+const deleteBtn = document.querySelectorAll(".delete");
 
+for (const el of deleteBtn) {
+    el.addEventListener("click", () => {
+        const index = todos.findIndex(item => item.id === el.id);
+        todos.splice(index, 1);
+    });
+}
 
-const deleteBtn = document.querySelectorAll(".delete")
-console.log(deleteBtn.id)
+// const deleteBtn = document.querySelectorAll(".delete")
+// console.log(deleteBtn.id)
 // for (const el of deleteBtn) {
 //     el.addEventListener("click", () => {
 //         const newArray = todos.filter(item => item.id === deleteBtn.id)
@@ -97,14 +104,14 @@ console.log(deleteBtn.id)
 // }
 
 
-const wyjebac = () => {
-    const newArray = todos.filter(item => item.id !== deleteBtn.id)
-    // console.log(newArray)
-    todos.remove(newArray);
-}
+// const wyjebac = () => {
+//     const newArray = todos.filter(item => item.id !== deleteBtn.id)
+//     // console.log(newArray)
+//     todos.remove(newArray);
+// }
 
 
-deleteBtn.addEventListener("click", wyjebac)
+// deleteBtn.addEventListener("click", wyjebac)
 
 
 
