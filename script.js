@@ -49,10 +49,18 @@ const onDeleteBtnHandler = (event) => {
 }
 
 const onCompleteBtn = (event) => {
-    const completed = document.querySelector('.complete')
-    const listElement = document.querySelector(`.todoElement-${idCounter}`)
-    listElement.classList.toggle('completed')
-    completed.classList.toggle('completed')
+
+    const item = event.target
+    if (item.classList[0] === "complete") {
+
+        const todo = item.parentElement
+        todo.classList.toggle("completed")
+
+        return
+    }
+
+
+
 }
 
 const onEditBtn = () => {
@@ -60,12 +68,24 @@ const onEditBtn = () => {
     const popupInput = document.querySelector('.popupInput')
     const paragraph = document.querySelector(`.paragraph-${idCounter}`)
     const popupP = document.querySelector('.popupP')
+
+
+
     popupInput.value = listElement.firstChild.textContent
     popupP.value = paragraph.firstChild.textContent
+
+    // const editTodos = todos.indexOf((obj => obj.id === +listElement))
+
+
+
+
+
+
 
     popup.style.display = 'flex';
 
 }
+
 
 
 
@@ -75,6 +95,7 @@ const createTodoElement = (todo) => {
     //Selektory
     const li = document.createElement('li')
     const div = document.createElement('div')
+    div.classList.add("tools")
     const p = document.createElement('p')
     p.classList.add(`paragraph-${todo.id}`)
 
@@ -124,6 +145,7 @@ const createCheckButton = () => {
     const completeBtn = document.createElement('button')
     completeBtn.classList.add('complete')
     completeBtn.innerHTML = '<i class="fas fa-check"></i>'
+    completeBtn.setAttribute('id', idCounter)
     completeBtn.onclick = onCompleteBtn
 
     return completeBtn
@@ -133,17 +155,34 @@ const createEditButton = () => {
     const editBtn = document.createElement('button')
     editBtn.classList.add('edit')
     editBtn.innerHTML = "EDIT";
+    editBtn.setAttribute('id', idCounter)
     editBtn.onclick = onEditBtn
     return editBtn
 }
 
-const changeTodo = () => {
+const changeTodo = (e) => {
     const listElement = document.querySelector(`.todoElement-${idCounter}`)
     const popupInput = document.querySelector('.popupInput')
     const paragraph = document.querySelector(`.paragraph-${idCounter}`)
     const popupP = document.querySelector('.popupP')
     listElement.firstChild.textContent = popupInput.value
     paragraph.firstChild.textContent = popupP.value
+
+    const editBtn = document.getElementById(`${idCounter}`)
+
+    const editIdBtn = editBtn.getAttribute('id')
+
+    const index = todos.findIndex(object => {
+        return object.id === +editIdBtn
+    })
+
+
+    todos[index].title = popupInput.value
+
+    todos[index].text = popupP.value
+    console.log("after update:", todos[index])
+
+
 
     popup.style.display = "none"
 }

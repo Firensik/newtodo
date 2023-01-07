@@ -91,14 +91,14 @@
   .todo span {
     font-size: 20px;
   }
-  .tools{
+  /* .tools{
     display: inline-block;
     justify-content: center;
     align-items: center;
     height: 0 auto;
     background-color: silver;
     margin-bottom: 5px;
-}
+} */
   .complete{
     color:blue;
     font-size: 20px;
